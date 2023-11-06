@@ -21,33 +21,60 @@ public class RopeManager : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        player = collision.gameObject;
-        playerCollider = player.GetComponent<Collider>();
-
         // Check if the colliding object is the ball and if the ball is not already attached
-        if (player.name.Equals("Player") && !ballAttached)
+        if (collision.gameObject.name.Equals("Player") && !ballAttached)
         {
+            player = collision.gameObject;
+            playerCollider = player.GetComponent<Collider>();
             player.GetComponent<PlayerMovement>().canBoost = false;
-            Debug.Log("Player collided");
             Rigidbody playerRb = player.GetComponent<Rigidbody>();
             playerRb.velocity = Vector3.zero;
             playerRb.isKinematic = true;
-            // Attach the ball to the pendulum
-            player.transform.SetParent(transform);
-
-            // Move the ball to the bottom of the pendulum
-            Vector3 parenScale = player.transform.parent.transform.localScale;
-            player.transform.localScale = new Vector3(2 / parenScale.x, 2 / parenScale.y, 2 / parenScale.z);
-
-            player.transform.localPosition = new Vector3(0, -1, 0);  // Adjust the position based on your specific setup
-            player.transform.localRotation = Quaternion.identity;
-
-
-            // Set the flag to indicate the ball is attached
-            ballAttached = true;
-
+            AttachPlayerToPendulum();
             attachedSFX.Play();
         }
+    }
+
+    private void AttachPlayerToPendulum()
+    {
+        // Attach the ball to the pendulum
+        player.transform.SetParent(transform);
+
+        Vector3 parenScale = player.transform.parent.transform.localScale;
+        player.transform.localScale = new Vector3(2 / parenScale.x, 2 / parenScale.y, 2 / parenScale.z);
+        //player.transform.localPosition = new Vector3(0, -1, 0);  // Adjust the position based on your specific setup
+        player.transform.localRotation = Quaternion.identity;
+
+        // Set x and z positions instantly
+        Vector3 newPos = player.transform.localPosition;
+        newPos.x = 0;
+        newPos.z = 0;
+        player.transform.localPosition = newPos;
+
+        // Set the flag to indicate the ball is attached
+        ballAttached = true;
+
+        // Lerp the y position
+        StartCoroutine(LerpToTargetY(player.transform.localPosition.y, -1, 0.25f));
+    }
+
+    private IEnumerator LerpToTargetY(float startY, float endY, float duration)
+    {
+        float timeElapsed = 0f;
+        while (timeElapsed < duration)
+        {
+            float newY = Mathf.Lerp(startY, endY, timeElapsed / duration);
+            Vector3 playerPos = player.transform.localPosition;
+            playerPos.y = newY;
+            player.transform.localPosition = playerPos;
+
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        // Ensure the final position is exactly what you want
+        Vector3 finalPos = player.transform.localPosition;
+        finalPos.y = endY;
+        player.transform.localPosition = finalPos;
     }
 
     private void Update()

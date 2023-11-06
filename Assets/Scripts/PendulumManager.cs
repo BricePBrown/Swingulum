@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PendulumManager : MonoBehaviour
 {
+    [HideInInspector]
     public float maxTorque = 1f;  // Maximum torque to apply for rotation
     private float maxAngle = 40;  // Maximum rotation angle
     private Rigidbody rb;  // Rigidbody component
-    [HideInInspector]
     public float currentTorque;  // Current torque direction
-    private bool shouldFlipTorque;  // Flag to indicate if the torque should be flipped
 
     void Start()
     {
@@ -18,7 +17,6 @@ public class PendulumManager : MonoBehaviour
         // Initialize current torque to max torque
         currentTorque = maxTorque;
         // Initialize shouldFlipTorque to false
-        shouldFlipTorque = false;
     }
 
     void FixedUpdate()
@@ -36,19 +34,19 @@ public class PendulumManager : MonoBehaviour
         // Check if the pendulum is within 10 degrees of the max angle
         if (zRotation > maxAngle - 20 && angularVelocity.z > 0)
         {
-            //Debug.Log(zRotation + ": Go CW : " + angularVelocity.z);
+            //Debug.Log(this.gameObject.name + " " + zRotation + ": Go CW : " + angularVelocity.z);
             // Apply a stronger counter-torque
             currentTorque = -2 * maxTorque;
         }
         else if (zRotation < (-maxAngle) + 20 && angularVelocity.z < 0)
         {
-            //Debug.Log(zRotation + ": Go CCW : " + angularVelocity.z);
+            //Debug.Log(this.gameObject.name + " " + zRotation + ": Go CCW : " + angularVelocity.z);
             // Apply a stronger counter-torque
             currentTorque = 2 * maxTorque;
         }
         else
         {
-            //Debug.Log(zRotation + ": Slow down : " + angularVelocity.z);
+            //Debug.Log(this.gameObject.name + " " + zRotation + ": Slow down : " + angularVelocity.z);
             // Reset to the maximum torque
             currentTorque = Mathf.Sign(currentTorque) * maxTorque;
         }
