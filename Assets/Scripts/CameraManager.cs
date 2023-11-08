@@ -26,7 +26,7 @@ public class CameraManager : MonoBehaviour
             player.GetComponent<Respawn>().SpawnCharacter();
             if (sstimer <= 0)
             {
-                ss.Shake(.1f, .2f);
+                ss.Shake(.2f, 1.4f);
                 spikeSFX.Play();
                 sstimer = 1f;
             }

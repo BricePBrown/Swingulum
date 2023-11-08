@@ -13,8 +13,8 @@ public class PrefabSpawner : MonoBehaviour
     public AudioSource spikeSFX;
 
     public Transform mainCamera;
-    public float shakeDuration = 0.2f;
-    public float shakeMagnitude = 0.1f;
+    private float shakeDuration = 0.25f;
+    private float shakeMagnitude = 2f;
 
     // Draw gizmos in the editor for preview
     void OnDrawGizmos()

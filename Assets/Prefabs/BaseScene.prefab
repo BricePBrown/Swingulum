@@ -701,7 +701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 4c3078f2181752b4b9524c3a3b6000a7, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 3c9df006537e34eb28ed44ad7300af3e, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -1941,10 +1941,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 1532022920395497652, guid: abf018413eb2d4a4aa1e18ffa9e77c04, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 3593795856846524624, guid: abf018413eb2d4a4aa1e18ffa9e77c04, type: 3}
       propertyPath: m_LocalPosition.x
       value: -44.690613
@@ -1991,7 +1987,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1532022920395497652, guid: abf018413eb2d4a4aa1e18ffa9e77c04, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 484644213305401526}
+      addedObject: {fileID: 4271314650467887396}
   m_SourcePrefab: {fileID: 100100000, guid: abf018413eb2d4a4aa1e18ffa9e77c04, type: 3}
 --- !u!4 &278063895587255972 stripped
 Transform:
@@ -2003,7 +1999,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1532022920395497652, guid: abf018413eb2d4a4aa1e18ffa9e77c04, type: 3}
   m_PrefabInstance: {fileID: 3604106659360499316}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &484644213305401526
+--- !u!114 &4271314650467887396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
