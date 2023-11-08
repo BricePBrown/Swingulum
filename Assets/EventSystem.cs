@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicCrossLevel : MonoBehaviour
+public class EventSystem : MonoBehaviour
 {
-
-    AudioSource music;
-    private static MusicCrossLevel instance = null;
+    private static EventSystem instance = null;
     // Update is called once per frame
     private void Start()
     {
@@ -16,11 +14,13 @@ public class MusicCrossLevel : MonoBehaviour
         } else {
             instance = this;
         }
-        
-        music = GetComponent<AudioSource>();
+
+        DontDestroyOnLoad(this);
     }
+
+    // Update is called once per frame
     void Update()
     {
-        DontDestroyOnLoad(music);
+        
     }
 }

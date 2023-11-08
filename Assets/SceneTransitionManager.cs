@@ -17,6 +17,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void StartTransitionToScene(string input)
     {
+        LevelTracker.VisitLevel(input);
         StartCoroutine(TransitionToScene(input));
     }
 
@@ -29,7 +30,7 @@ public class SceneTransitionManager : MonoBehaviour
         } else {
             instance = this;
         }
-        
+
         DontDestroyOnLoad(this.gameObject);
 
         // If you only want to make the panel persistent, you can use:
@@ -82,6 +83,9 @@ public class SceneTransitionManager : MonoBehaviour
         // Set initial position and pivot for the end of the transition
         transitionPanel.anchoredPosition = new Vector2(targetWidth, transitionPanel.anchoredPosition.y);
         transitionPanel.pivot = new Vector2(1, transitionPanel.pivot.y);
+
+        // Visit the new scene
+        LevelTracker.VisitLevel(SceneManager.GetActiveScene().name);
 
         // Reset elapsed time
         elapsed = 0;
