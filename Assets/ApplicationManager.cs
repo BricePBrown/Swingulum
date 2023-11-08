@@ -34,7 +34,7 @@ public class ApplicationManager : MonoBehaviour
         // Check for Escape key to close the game
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            //Application.Quit();
         }
     }
 
