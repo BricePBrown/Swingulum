@@ -1,9 +1,13 @@
 using UnityEngine;
+using System.Collections;
 
 public class CameraManager : MonoBehaviour
 {
     public GameObject player;  // Reference to the player GameObject
     private Camera mainCamera;  // Reference to the main camera
+    private float sstimer = 1.0f;
+    public ScreenShake ss;
+    public AudioSource spikeSFX;
 
     void Start()
     {
@@ -20,6 +24,14 @@ public class CameraManager : MonoBehaviour
         {
             // Trigger respawn
             player.GetComponent<Respawn>().SpawnCharacter();
+            if (sstimer <= 0)
+            {
+                ss.Shake(.1f, .2f);
+                spikeSFX.Play();
+                sstimer = 1f;
+            }
         }
+
+        sstimer -= Time.deltaTime;
     }
 }
