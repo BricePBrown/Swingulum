@@ -12,6 +12,11 @@ public class Respawn : MonoBehaviour
     bool playerSpawned = false;
     bool isAlive;
 
+    
+    // Special Effects
+    [SerializeField] ParticleSystem checkpointParticles;
+    [SerializeField] AudioSource checkpointSFX;
+
     private void Start()
     {
         //  respawnPoint = new Vector3(-21.7f, -0.53f, 0);
@@ -106,5 +111,18 @@ public class Respawn : MonoBehaviour
         trail.time = originalTime;
     }
 
+    public void SetRespawnPoint(Transform input)
+    {
+        if(input != respawnPoint)
+        {
+            respawnPoint = input;
+            PlayCheckpointEffects();
+        }
+    }
 
+    private void PlayCheckpointEffects()
+    {
+        checkpointParticles.Play();
+        checkpointSFX.Play();
+    }
 }

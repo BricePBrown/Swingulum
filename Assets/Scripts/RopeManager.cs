@@ -11,6 +11,8 @@ public class RopeManager : MonoBehaviour
     Collider thisCollider;
 
     public AudioSource attachedSFX;
+    public Transform checkpoint = null;
+
 
     
     public MMFeedbacks ballShootFeedback;
@@ -39,6 +41,13 @@ public class RopeManager : MonoBehaviour
     {
         // Attach the ball to the pendulum
         player.transform.SetParent(transform);
+
+        // If there is a checkpoint, set the player's respawn to it
+        if(GetCheckpoint())
+        {
+            Debug.Log("Set respawn");
+            player.GetComponent<Respawn>().SetRespawnPoint(GetCheckpoint());
+        }
 
         Vector3 parenScale = player.transform.parent.transform.localScale;
         player.transform.localScale = new Vector3(2 / parenScale.x, 2 / parenScale.y, 2 / parenScale.z);
@@ -164,5 +173,15 @@ public class RopeManager : MonoBehaviour
         yield return new WaitForSeconds(0.4f);  // Wait for 1 second
         Physics.IgnoreCollision(playerCollider, thisCollider, false);
         player.GetComponent<PlayerMovement>().canBoost = true;
+    }
+
+    
+    private Transform GetCheckpoint()
+    {
+        if(checkpoint)
+        {
+            return checkpoint;
+        }
+        return null;
     }
 }

@@ -9,7 +9,6 @@ public class PendulumManager : MonoBehaviour
     private float maxAngle = 40;  // Maximum rotation angle
     private Rigidbody rb;  // Rigidbody component
     public float currentTorque;  // Current torque direction
-
     void Start()
     {
         // Get the Rigidbody component

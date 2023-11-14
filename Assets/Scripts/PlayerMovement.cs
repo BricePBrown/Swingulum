@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public float colorChangeSpeed = 1f;
     Color targetColor = Color.white;
 
+
     private void Start()
     {
         InitializeComponents();
