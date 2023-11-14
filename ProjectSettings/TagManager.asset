@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pendulum
+  - Coin
   layers:
   - Default
   - TransparentFX
