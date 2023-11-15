@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X / X Coins
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5264ee67d33f4e439c5b2e4f6af008a, type: 2}
   m_sharedMaterial: {fileID: 6034678366757756301, guid: b5264ee67d33f4e439c5b2e4f6af008a, type: 2}

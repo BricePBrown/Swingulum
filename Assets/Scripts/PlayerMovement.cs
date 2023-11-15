@@ -86,43 +86,64 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        HandleTriggerCollisions(other);
+        HandleTriggerCollisions(other, rb.velocity.x);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        HandlePhysicsCollisions(other);
+        HandlePhysicsCollisions(other, rb.velocity.x);
     }
 
     // Handles interactions with triggers (e.g. Vines, Ground, Pendulum)
-    private void HandleTriggerCollisions(Collider other)
+    private void HandleTriggerCollisions(Collider other, float velocity)
     {
-        UpdateCameraTargetPosition(other);
+        UpdateCameraTargetPosition(other, velocity);
     }
 
     // Handles interactions with physics objects (e.g. Spikes, Ground)
-    private void HandlePhysicsCollisions(Collision other)
+    private void HandlePhysicsCollisions(Collision other, float velocity)
     {
-        UpdateCameraTargetPosition(other.collider);
+        UpdateCameraTargetPosition(other.collider, velocity);
     }
 
     // Updates the camera's target position based on the object the player collided with
-    private void UpdateCameraTargetPosition(Collider other)
+    private void UpdateCameraTargetPosition(Collider other, float velocity)
     {
+        if ((other.transform.parent == null || !other.transform.parent.name.Contains("Pendulum")) &&
+    !other.name.ToLower().Contains("bounce"))
+        {
+            // Exit the method if the conditions are not met
+            return;
+        }
+
         shouldMoveCamera = true;
         initialCameraPosition = Camera.main.transform.position;
-        Transform parentTransform = other.transform.parent;
 
-        if (parentTransform != null && parentTransform.name.Contains("Pendulum"))
+        // Calculate potential new positions
+        float offset = (velocity >= 0) ? 25 : -25;
+        float newX = initialCameraPosition.x;
+        //float newY = initialCameraPosition.y;
+
+        if (other.transform.parent != null && other.transform.parent.name.Contains("Pendulum"))
         {
-            targetCameraPosition = new Vector3(parentTransform.position.x + 25, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            newX = other.transform.parent.position.x + offset;
+            //newY = other.transform.parent.position.y - 11;
         }
-        else if (!other.name.Equals("Goal") && !other.name.Contains("Spike"))
+        else if (other.name.ToLower().Contains("bounce"))
         {
-            targetCameraPosition = new Vector3(other.transform.position.x + 25, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            newX = other.transform.position.x + velocity;
+            //newY = other.transform.position.y - 11;
         }
+
+        // Apply the threshold
+        targetCameraPosition = new Vector3(
+            Mathf.Abs(newX - initialCameraPosition.x) > 15 ? newX : initialCameraPosition.x,
+            initialCameraPosition.y,
+            Camera.main.transform.position.z
+        );
 
         boostRemaining = maxBoost;
         lerpTime = 0;
     }
+
 }
