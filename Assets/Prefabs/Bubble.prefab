@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646e10cdf39db4b41bd153abb1a680d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upwardSpeed: 2
+  upwardSpeed: 3
   bubbleSFX: {fileID: 5802813014057973423}
 --- !u!54 &5759851199071228259
 Rigidbody:
