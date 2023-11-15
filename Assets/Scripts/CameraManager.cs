@@ -5,8 +5,8 @@ public class CameraManager : MonoBehaviour
 {
     public GameObject player;  // Reference to the player GameObject
     private Camera mainCamera;  // Reference to the main camera
-    private float sstimer = 1.0f;
-    public ScreenShake ss;
+    //private float sstimer = 1.0f;
+    //public ScreenShake ss;
     public AudioSource spikeSFX;
 
     void Start()
@@ -24,14 +24,14 @@ public class CameraManager : MonoBehaviour
         {
             // Trigger respawn
             player.GetComponent<Respawn>().SpawnCharacter();
-            if (sstimer <= 0)
+            /*if (sstimer <= 0)
             {
                 ss.Shake(.2f, 1.4f);
                 spikeSFX.Play();
                 sstimer = 1f;
-            }
+            }*/
         }
 
-        sstimer -= Time.deltaTime;
+        //sstimer -= Time.deltaTime;
     }
 }
