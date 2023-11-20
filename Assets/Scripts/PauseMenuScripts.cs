@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MoreMountains.Tools;
 
 public class PauseMenuScripts : MonoBehaviour
 {
-    [SerializeField] AudioSource music;
     [SerializeField] Slider volumeSlider;
     [SerializeField] GameObject menu;
     [SerializeField] Image contour;
@@ -72,10 +72,7 @@ public class PauseMenuScripts : MonoBehaviour
     {
         var foundAudioSources = FindObjectsOfType(typeof(AudioSource));
         Debug.Log(volumeSlider.value);
-        foreach (AudioSource audio in foundAudioSources)
-        {
-            audio.volume = volumeSlider.value;
-        }
+        AudioListener.volume = volumeSlider.value;
     }
 
     public void QuitApplication()
