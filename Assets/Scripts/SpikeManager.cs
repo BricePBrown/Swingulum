@@ -74,7 +74,7 @@ public class PrefabSpawner : MonoBehaviour
             spikeSFX.Play();
 
             // Start the camera shake coroutine
-            StartCoroutine(CameraShake());
+            //StartCoroutine(CameraShake());
         }
     }
 
