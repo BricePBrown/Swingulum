@@ -31,6 +31,7 @@ public class CoinManager : MonoBehaviour
 
     private void DeactivateCoin()
     {
-        gameObject.SetActive(false);
+        FindAnyObjectByType<CoinTracker>().updateCoins();
+        this.gameObject.SetActive(false);
     }
 }

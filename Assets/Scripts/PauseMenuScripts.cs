@@ -13,11 +13,21 @@ public class PauseMenuScripts : MonoBehaviour
     private static float musicVolume = 1f;
     private static bool paused = false;
 
+    public static PauseMenuScripts Instance { get; private set; } // Singleton instance
+
     private Color targetColor = new Color(0f, 0f, 0f, 0f);
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); // Destroy this instance because it's a duplicate
+        }
     }
 
     // Update is called once per frame

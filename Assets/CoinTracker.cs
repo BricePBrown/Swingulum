@@ -23,6 +23,7 @@ public class CoinTracker : MonoBehaviour
     public void updateCoins()
     {
         currentCoins++;
+        Debug.Log(SceneManager.GetActiveScene());
         PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "CoinsGet", currentCoins);
         text.text = currentCoins + " / " + maxCoins + " Coins";
     }

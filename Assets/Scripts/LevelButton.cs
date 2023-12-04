@@ -27,8 +27,8 @@ public class LevelButton : MonoBehaviour
             GetComponent<Button>().enabled = true;
             lockImage.enabled = false;
             coinsText.enabled = true;
-
-            if(PlayerPrefs.GetInt(levelName + "CoinsMax", -1) != -1)
+            Debug.Log(levelName);
+            if (PlayerPrefs.GetInt(levelName + "CoinsMax", -1) != -1)
             {
                 coinsText.text = "" + PlayerPrefs.GetInt(levelName + "CoinsGet", 0) + "/" +  PlayerPrefs.GetInt(levelName + "CoinsMax", 0);
             }
